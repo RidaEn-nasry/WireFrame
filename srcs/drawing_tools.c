@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 13:42:07 by mbucci            #+#    #+#             */
-/*   Updated: 2021/12/14 23:16:22 by mbucci           ###   ########.fr       */
+/*   Created: 2021/12/21 17:50:04 by ren-nasr          #+#    #+#             */
+/*   Updated: 2021/12/25 19:02:03 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 float	ft_abs(float x)
 {
@@ -28,22 +28,24 @@ float	ft_max(float a, float b)
 		return (a);
 }
 
-void	apply_zoom(t_coor *coos, t_fdf *data)
+void	apply_zoom(t_coor *coord, t_fdf *data)
 {
-	coos->x *= data->zoom;
-	coos->y *= data->zoom;
-	coos->x1 *= data->zoom;
-	coos->y1 *= data->zoom;
+	coord->x *= data->config->zoom;
+	coord->y *= data->config->zoom;
+	coord->x_ *= data->config->zoom;
+	coord->y_ *= data->config->zoom;
 }
 
-void	apply_angle(t_coor *coos, t_fdf *data)
+void	apply_angle(t_coor *coord, t_fdf *data)
 {
-	coos->x = (coos->x - coos->y) * cos(1.085);
-	coos->y = (coos->x + coos->y) * sin(1.085) - (data->h * coos->z);
-	coos->x += data->shift_x;
-	coos->y += data->shift_y;
-	coos->x1 = (coos->x1 - coos->y1) * cos(1.085);
-	coos->y1 = (coos->x1 + coos->y1) * sin(1.085) - (data->h * coos->z1);
-	coos->x1 += data->shift_x;
-	coos->y1 += data->shift_y;
+	coord->x = (coord->x - coord->y) * cos(1.085);
+		coord->y = (coord->x + coord->y) * sin(1.085) - \
+	(data->config->altitude * coord->z);
+	coord->x += data->config->shift_x;
+	coord->y += data->config->shift_y;
+	coord->x_ = (coord->x_ - coord->y_) * cos(1.085);
+	coord->y_ = (coord->x_ + coord->y_) * sin(1.085) - \
+		(data->config->altitude * coord->z_);
+	coord->x_ += data->config->shift_x;
+	coord->y_ += data->config->shift_y;
 }

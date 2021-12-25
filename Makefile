@@ -1,9 +1,13 @@
+MAKEFLAGS += --silent
+
+
 NAME	=	fdf
 
-SRCS	=	srcs/main.c			\
-			srcs/read_file.c	\
-			srcs/draw_map.c		\
-			srcs/drawing_tools.c
+SRCS	=	srcs/main.c \
+			srcs/read.c \
+			srcs/draw.c \
+			srcs/drawing_tools.c \
+			srcs/errors.c\
 
 OBJS	=	$(SRCS:.c=.o)
 
@@ -11,29 +15,26 @@ CC		=	gcc
 
 CFLAGS	=	-Wall -Wextra -Werror
 
-M_FLAGS	=	-lmlx -Llibft -lft -framework AppKit -framework OpenGL
+M_FLAGS	=	-lmlx -framework AppKit -framework OpenGL
 
-L_FLAGS	=	-lmlx -lX11 -lXext -Llibft -lft
+LIBFT_GNL  = libraries/libft/libft.a libraries/get_next_line/*
 
+all: $(clean) $(NAME)
 
-all:		$(NAME)
+$(NAME):	$(OBJS) $(SRCS)
+			@make -C libraries/libft/
+			@gcc $(CFLAGS) $(OBJS) $(M_FLAGS) $(LIBFT_GNL) -o $(NAME)
 
-$(NAME):	$(OBJS)
-			make -C libft/
-			$(CC) $(CFLAGS) $(OBJS) $(M_FLAGS) -o $(NAME)
-
-linux:		$(OBJS)
-			make -C libft/
-			$(CC) $(CFLAGS) $(OBJS) $(L_FLAGS) -o $(NAME)
 
 clean:
-			rm -rf $(OBJS)
-			make -C libft/ clean
+		@rm -rf $(OBJS)
+		@cd ./libraries/libft && make clean 
 
-fclean:		
-			make -C libft/ fclean
-			rm -rf $(NAME) $(OBJS)
+
+fclean:	
+		@rm -rf $(NAME) $(OBJS)
+		@cd ./libraries/libft && make fclean
 
 re:			clean all
 
-.PHONY:		re clean fclean libftmake all
+.PHONY:		re clean fclean all
