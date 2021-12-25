@@ -18,6 +18,6 @@ Here is an example:
 
 # How to use:
 ```
-make
-./fdf test_maps/chose_any_map
+$ make
+$ ./fdf test_maps/chose_any_map
 ```
