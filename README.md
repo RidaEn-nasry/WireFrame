@@ -14,3 +14,10 @@ to observe the scene from a particular viewpoint.
 Here is an example:
 
 ![alt text](https://github.com/RidaEn-nasry/WireFrame/blob/master/model.png)
+
+
+# How to use:
+```
+make
+./fdf test_maps/chose_any_map
+```
