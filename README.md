@@ -13,7 +13,7 @@ to observe the scene from a particular viewpoint.
 
 Here is an example:
 
-![alt text](https://github.com/RidaEn-nasry/WireFrame/blob/master/model.png)
+![alt text](https://github.com/RidaEn-nasry/WireFrame/blob/master/fdf.png)
 
 
 # How to use:
